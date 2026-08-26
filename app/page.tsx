@@ -13,6 +13,7 @@ import {
 import { motion } from "framer-motion";
 
 import Navbar from "@/components/Navbar";
+import ShopSection from "@/components/ShopSection";
 
 export default function Home() {
   const [submitted, setSubmitted] = useState(false);
@@ -100,8 +101,9 @@ I can send photos of the boots on WhatsApp.`;
 
             {/* Description */}
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
-              Buy quality boots without breaking the bank, or turn your unused pair
-              into cash. With CLEATO, everyone gets more value from every boot.
+              Buy quality boots without breaking the bank, or turn your
+              unused pair into cash. With CLEATO, everyone gets more value
+              from every boot.
             </p>
 
             {/* Buttons */}
@@ -146,41 +148,13 @@ I can send photos of the boots on WhatsApp.`;
       {/* =========================
           SHOP
       ========================== */}
-      <section
-        id="shop"
-        className="border-t border-white/10 bg-[#080808] px-6 py-24"
-      >
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#22c55e]">
-              Shop CLEATO
-            </p>
 
-            <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
-              Find your next pair.
-            </h2>
-
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
-              Browse available football boots and find quality pairs at
-              better prices.
-            </p>
-          </div>
-
-          <div className="mt-12">
-            <a
-              href="/products/predator"
-              className="inline-flex items-center gap-2 rounded-full bg-[#22c55e] px-7 py-3.5 text-sm font-black text-black transition hover:bg-[#16a34a]"
-            >
-              View Available Boots
-              <ArrowRight size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
+      <ShopSection />
 
       {/* =========================
           SELL YOUR BOOTS
       ========================== */}
+
       <section
         id="sell"
         className="border-t border-white/10 bg-[#0b0b0b] px-6 py-24"
@@ -211,6 +185,7 @@ I can send photos of the boots on WhatsApp.`;
                 </p>
 
                 <div className="mt-8 space-y-7">
+                  {/* Step 1 */}
                   <div className="flex gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#22c55e] font-black text-black">
                       01
@@ -228,6 +203,7 @@ I can send photos of the boots on WhatsApp.`;
                     </div>
                   </div>
 
+                  {/* Step 2 */}
                   <div className="flex gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#22c55e] font-black text-black">
                       02
@@ -243,6 +219,7 @@ I can send photos of the boots on WhatsApp.`;
                     </div>
                   </div>
 
+                  {/* Step 3 */}
                   <div className="flex gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#22c55e] font-black text-black">
                       03
@@ -258,6 +235,7 @@ I can send photos of the boots on WhatsApp.`;
                     </div>
                   </div>
 
+                  {/* Step 4 */}
                   <div className="flex gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#22c55e] font-black text-black">
                       04
@@ -300,7 +278,9 @@ I can send photos of the boots on WhatsApp.`;
             {/* Sell Form */}
             <div className="rounded-[2rem] border border-white/10 bg-[#101010] p-6 shadow-2xl sm:p-8">
               <div className="mb-8">
-                <h3 className="text-2xl font-black">Submit your boots</h3>
+                <h3 className="text-2xl font-black">
+                  Submit your boots
+                </h3>
 
                 <p className="mt-2 text-sm leading-6 text-white/40">
                   Fill in the details below. You&apos;ll be taken to WhatsApp
@@ -520,6 +500,7 @@ I can send photos of the boots on WhatsApp.`;
       {/* =========================
           ABOUT
       ========================== */}
+
       <section
         id="about"
         className="border-t border-white/10 bg-[#080808] px-6 py-24"
@@ -613,6 +594,7 @@ I can send photos of the boots on WhatsApp.`;
       {/* =========================
           CONTACT
       ========================== */}
+
       <section
         id="contact"
         className="border-t border-white/10 bg-[#0b0b0b] px-6 py-24"
@@ -640,7 +622,7 @@ I can send photos of the boots on WhatsApp.`;
               </p>
 
               <a
-                href="https://wa.me/923092026986?text=Hi%20CLEATO,%20I%20want%20to%20know%20more%20about%20your%20football%20boots"
+                href="https://wa.me/923092026986?text=Hi%20CLEATO%2C%20I%20want%20to%20know%20more%20about%20your%20football%20boots"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#22c55e] px-7 py-4 text-sm font-black text-black transition hover:bg-[#16a34a]"
@@ -741,6 +723,7 @@ I can send photos of the boots on WhatsApp.`;
       {/* =========================
           FOOTER
       ========================== */}
+
       <footer className="border-t border-white/10 bg-[#080808] px-6 py-8">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-white/30 sm:flex-row">
           <p>
