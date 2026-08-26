@@ -13,7 +13,6 @@ import {
 import { motion } from "framer-motion";
 
 import Navbar from "@/components/Navbar";
-import ShopSection from "@/components/ShopSection";
 
 export default function Home() {
   const [submitted, setSubmitted] = useState(false);
@@ -72,39 +71,44 @@ I can send photos of the boots on WhatsApp.`;
     <main id="top" className="min-h-screen bg-[#080808] text-white">
       <Navbar />
 
-      {/* HERO */}
+      {/* =========================
+          HERO
+      ========================== */}
       <section className="relative flex min-h-screen items-center overflow-hidden pt-20">
         {/* Background glow */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#22c55e]/10 blur-[140px]" />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#22c55e]/10 blur-[150px]" />
 
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2">
-          {/* HERO TEXT */}
+        <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 py-24 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
+            className="flex flex-col items-center"
           >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#22c55e]/20 bg-[#22c55e]/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#22c55e]">
+            {/* Badge */}
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#22c55e]/20 bg-[#22c55e]/10 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#22c55e]">
               <Zap size={14} />
               Football boots. Better prices.
             </div>
 
-            <h1 className="max-w-3xl text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+            {/* Main heading */}
+            <h1 className="max-w-5xl text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-8xl">
               PLAY MORE.
               <br />
               <span className="text-[#22c55e]">SPEND LESS.</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-7 text-white/50 sm:text-lg">
-              CLEATO gives footballers access to quality football boots at
-              great prices. Buy almost-new boots or sell your own pair and
-              give them a second life.
+            {/* Description */}
+            <p className="mt-7 max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
+              Buy quality boots without breaking the bank, or turn your unused pair
+              into cash. With CLEATO, everyone gets more value from every boot.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            {/* Buttons */}
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#shop"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#22c55e] px-7 py-3.5 text-sm font-black text-black transition hover:bg-[#16a34a]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#22c55e] px-8 py-4 text-sm font-black text-black transition hover:bg-[#16a34a]"
               >
                 Shop Boots
                 <ArrowRight size={18} />
@@ -112,14 +116,14 @@ I can send photos of the boots on WhatsApp.`;
 
               <a
                 href="#sell"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-7 py-3.5 text-sm font-bold text-white transition hover:border-white/20 hover:bg-white/[0.06]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-8 py-4 text-sm font-bold text-white transition hover:border-white/20 hover:bg-white/[0.06]"
               >
                 Sell Your Boots
               </a>
             </div>
 
-            {/* TRUST POINTS */}
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-4 text-sm text-white/40">
+            {/* Trust points */}
+            <div className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-5 text-sm text-white/40">
               <div className="flex items-center gap-2">
                 <ShieldCheck size={17} className="text-[#22c55e]" />
                 Quality Checked
@@ -136,59 +140,53 @@ I can send photos of the boots on WhatsApp.`;
               </div>
             </div>
           </motion.div>
-
-          {/* HERO VISUAL */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="relative flex min-h-[400px] items-center justify-center lg:min-h-[550px]"
-          >
-            <div className="absolute h-[320px] w-[320px] rounded-full border border-[#22c55e]/10 bg-[#22c55e]/5 blur-sm sm:h-[430px] sm:w-[430px]" />
-
-            <div className="relative w-full max-w-[520px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 shadow-2xl">
-              <div className="flex aspect-square items-center justify-center overflow-hidden rounded-[1.5rem] bg-[#111111]">
-                <img
-                  src="/products/adidas-predator.png"
-                  alt="Adidas Predator football boots"
-                  className="h-full w-full object-contain p-6"
-                />
-              </div>
-
-              <div className="flex items-center justify-between px-3 py-4">
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-[#22c55e]">
-                    Featured Boot
-                  </p>
-
-                  <h3 className="mt-1 text-xl font-black">
-                    Adidas Predator
-                  </h3>
-                </div>
-
-                <div className="text-right">
-                  <p className="text-xs text-white/30">From</p>
-
-                  <p className="font-black text-[#22c55e]">
-                    PKR 15,000
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
-      {/* SHOP */}
-      <ShopSection />
+      {/* =========================
+          SHOP
+      ========================== */}
+      <section
+        id="shop"
+        className="border-t border-white/10 bg-[#080808] px-6 py-24"
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#22c55e]">
+              Shop CLEATO
+            </p>
 
-      {/* SELL YOUR BOOTS */}
+            <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
+              Find your next pair.
+            </h2>
+
+            <p className="mt-6 max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
+              Browse available football boots and find quality pairs at
+              better prices.
+            </p>
+          </div>
+
+          <div className="mt-12">
+            <a
+              href="/products/predator"
+              className="inline-flex items-center gap-2 rounded-full bg-[#22c55e] px-7 py-3.5 text-sm font-black text-black transition hover:bg-[#16a34a]"
+            >
+              View Available Boots
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================
+          SELL YOUR BOOTS
+      ========================== */}
       <section
         id="sell"
         className="border-t border-white/10 bg-[#0b0b0b] px-6 py-24"
       >
         <div className="mx-auto max-w-7xl">
-          {/* SECTION HEADER */}
+          {/* Section Header */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#22c55e]">
               Sell Your Boots
@@ -205,7 +203,7 @@ I can send photos of the boots on WhatsApp.`;
           </div>
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-            {/* SELL PROCESS */}
+            {/* Sell Process */}
             <div>
               <div className="rounded-[2rem] border border-[#22c55e]/20 bg-[#22c55e]/5 p-8">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#22c55e]">
@@ -219,7 +217,9 @@ I can send photos of the boots on WhatsApp.`;
                     </div>
 
                     <div>
-                      <h3 className="font-black">Tell us about your boots</h3>
+                      <h3 className="font-black">
+                        Tell us about your boots
+                      </h3>
 
                       <p className="mt-1 text-sm leading-6 text-white/40">
                         Enter the brand, model, size, condition and price you
@@ -275,7 +275,7 @@ I can send photos of the boots on WhatsApp.`;
                 </div>
               </div>
 
-              {/* SELLER NOTE */}
+              {/* Seller Note */}
               <div className="mt-5 rounded-[1.5rem] border border-white/10 bg-[#101010] p-6">
                 <div className="flex gap-4">
                   <ShieldCheck
@@ -284,7 +284,9 @@ I can send photos of the boots on WhatsApp.`;
                   />
 
                   <div>
-                    <h3 className="font-black">Be honest about condition</h3>
+                    <h3 className="font-black">
+                      Be honest about condition
+                    </h3>
 
                     <p className="mt-2 text-sm leading-6 text-white/40">
                       Accurate information helps us evaluate your boots fairly
@@ -295,12 +297,10 @@ I can send photos of the boots on WhatsApp.`;
               </div>
             </div>
 
-            {/* SELL FORM */}
+            {/* Sell Form */}
             <div className="rounded-[2rem] border border-white/10 bg-[#101010] p-6 shadow-2xl sm:p-8">
               <div className="mb-8">
-                <h3 className="text-2xl font-black">
-                  Submit your boots
-                </h3>
+                <h3 className="text-2xl font-black">Submit your boots</h3>
 
                 <p className="mt-2 text-sm leading-6 text-white/40">
                   Fill in the details below. You&apos;ll be taken to WhatsApp
@@ -309,7 +309,7 @@ I can send photos of the boots on WhatsApp.`;
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                {/* NAME + WHATSAPP */}
+                {/* Name + WhatsApp */}
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
@@ -352,7 +352,7 @@ I can send photos of the boots on WhatsApp.`;
                   </div>
                 </div>
 
-                {/* BRAND + MODEL */}
+                {/* Brand + Model */}
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
@@ -401,7 +401,7 @@ I can send photos of the boots on WhatsApp.`;
                   </div>
                 </div>
 
-                {/* SIZE + CONDITION */}
+                {/* Size + Condition */}
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
@@ -449,7 +449,7 @@ I can send photos of the boots on WhatsApp.`;
                   </div>
                 </div>
 
-                {/* PRICE */}
+                {/* Price */}
                 <div>
                   <label
                     htmlFor="price"
@@ -471,7 +471,7 @@ I can send photos of the boots on WhatsApp.`;
                   />
                 </div>
 
-                {/* DETAILS */}
+                {/* Details */}
                 <div>
                   <label
                     htmlFor="details"
@@ -491,7 +491,7 @@ I can send photos of the boots on WhatsApp.`;
                   />
                 </div>
 
-                {/* SUBMIT */}
+                {/* Submit */}
                 <button
                   type="submit"
                   className="flex w-full items-center justify-center gap-3 rounded-full bg-[#22c55e] px-7 py-4 text-sm font-black text-black transition hover:bg-[#16a34a]"
@@ -517,13 +517,14 @@ I can send photos of the boots on WhatsApp.`;
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* =========================
+          ABOUT
+      ========================== */}
       <section
         id="about"
         className="border-t border-white/10 bg-[#080808] px-6 py-24"
       >
         <div className="mx-auto max-w-7xl">
-          {/* SECTION HEADER */}
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#22c55e]">
               About CLEATO
@@ -540,9 +541,8 @@ I can send photos of the boots on WhatsApp.`;
             </p>
           </div>
 
-          {/* ABOUT CARDS */}
+          {/* About Cards */}
           <div className="mt-14 grid gap-5 md:grid-cols-3">
-            {/* MISSION */}
             <div className="rounded-[1.75rem] border border-white/10 bg-[#101010] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#22c55e]/30">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#22c55e]/10 text-xl font-black text-[#22c55e]">
                 01
@@ -556,7 +556,6 @@ I can send photos of the boots on WhatsApp.`;
               </p>
             </div>
 
-            {/* SECOND LIFE */}
             <div className="rounded-[1.75rem] border border-white/10 bg-[#101010] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#22c55e]/30">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#22c55e]/10 text-xl font-black text-[#22c55e]">
                 02
@@ -572,7 +571,6 @@ I can send photos of the boots on WhatsApp.`;
               </p>
             </div>
 
-            {/* PLAYERS */}
             <div className="rounded-[1.75rem] border border-white/10 bg-[#101010] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#22c55e]/30">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#22c55e]/10 text-xl font-black text-[#22c55e]">
                 03
@@ -587,7 +585,7 @@ I can send photos of the boots on WhatsApp.`;
             </div>
           </div>
 
-          {/* BOTTOM STATEMENT */}
+          {/* Bottom Statement */}
           <div className="mt-10 rounded-[1.75rem] border border-[#22c55e]/20 bg-[#22c55e]/5 p-8 md:p-10">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div>
@@ -612,14 +610,16 @@ I can send photos of the boots on WhatsApp.`;
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* =========================
+          CONTACT
+      ========================== */}
       <section
         id="contact"
         className="border-t border-white/10 bg-[#0b0b0b] px-6 py-24"
       >
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-center">
-            {/* CONTACT INTRO */}
+            {/* Contact Intro */}
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#22c55e]">
                 Get in touch
@@ -628,7 +628,9 @@ I can send photos of the boots on WhatsApp.`;
               <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">
                 Got a question?
                 <br />
-                <span className="text-[#22c55e]">Let&apos;s talk boots.</span>
+                <span className="text-[#22c55e]">
+                  Let&apos;s talk boots.
+                </span>
               </h2>
 
               <p className="mt-6 max-w-xl text-base leading-8 text-white/50 sm:text-lg">
@@ -637,9 +639,8 @@ I can send photos of the boots on WhatsApp.`;
                 message and we&apos;ll help you out.
               </p>
 
-              {/* WHATSAPP BUTTON */}
               <a
-                href="https://wa.me/923092026986?text=Hi%20CLEATO,%20I%20want%20to%20know%20more%20about%20your%20football%20boots."
+                href="https://wa.me/923092026986?text=Hi%20CLEATO,%20I%20want%20to%20know%20more%20about%20your%20football%20boots"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#22c55e] px-7 py-4 text-sm font-black text-black transition hover:bg-[#16a34a]"
@@ -649,9 +650,9 @@ I can send photos of the boots on WhatsApp.`;
               </a>
             </div>
 
-            {/* CONTACT INFORMATION */}
+            {/* Contact Information */}
             <div className="space-y-4">
-              {/* WHATSAPP */}
+              {/* WhatsApp */}
               <a
                 href="https://wa.me/923092026986"
                 target="_blank"
@@ -680,7 +681,7 @@ I can send photos of the boots on WhatsApp.`;
                 </div>
               </a>
 
-              {/* SELL */}
+              {/* Sell */}
               <a
                 href="#sell"
                 className="group block rounded-[1.5rem] border border-white/10 bg-[#101010] p-6 transition duration-300 hover:border-[#22c55e]/30"
@@ -708,7 +709,7 @@ I can send photos of the boots on WhatsApp.`;
                 </div>
               </a>
 
-              {/* RESPONSE */}
+              {/* Help Topics */}
               <div className="rounded-[1.5rem] border border-white/10 bg-[#101010] p-6">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/30">
                   What can we help with?
@@ -737,10 +738,14 @@ I can send photos of the boots on WhatsApp.`;
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* =========================
+          FOOTER
+      ========================== */}
       <footer className="border-t border-white/10 bg-[#080808] px-6 py-8">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-white/30 sm:flex-row">
-          <p>© {new Date().getFullYear()} CLEATO. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} CLEATO. All rights reserved.
+          </p>
 
           <p>Football boots. Better prices.</p>
         </div>
