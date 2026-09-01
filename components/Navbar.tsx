@@ -1,124 +1,199 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import {
-  Menu,
-  X,
-  ShoppingBag,
-  ArrowRight,
-} from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
-const links = [
-  { name: "Home", href: "#top" },
-  { name: "Shop", href: "#shop" },
-  { name: "Sell Your Boots", href: "#sell" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
-];
+function InstagramIcon({ size = 14, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-
-  const closeMenu = () => {
-    setOpen(false);
-  };
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-[#080808]/85 backdrop-blur-xl">
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-neutral-200">
+      {/* Top micro announcement bar */}
+      <div className="bg-[#f5f5f5] text-[11px] font-bold text-neutral-700 px-6 py-2 flex justify-between items-center border-b border-neutral-200/70">
+        <span className="tracking-wider flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-600"></span>
+          CLEATO FOOTBALL · WE BUY & SELL BRAND NEW & PRE-OWNED BOOTS
+        </span>
+        <div className="flex items-center gap-4">
+          <a
+            href="https://www.instagram.com/cleato3?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black transition flex items-center gap-1 text-neutral-800"
+          >
+            <InstagramIcon size={13} className="text-pink-600" />
+            <span>@cleato3</span>
+          </a>
+          <span className="text-neutral-300">|</span>
+          <Link href="/#sell" className="hover:text-black transition">
+            Sell / Trade Boots
+          </Link>
+          <span className="text-neutral-300">|</span>
+          <a
+            href="https://wa.me/923092026986"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black transition flex items-center gap-1"
+          >
+            WhatsApp Support
+          </a>
+        </div>
+      </div>
 
-        {/* LOGO */}
-        <a
-          href="#top"
-          onClick={closeMenu}
-          className="group flex items-center gap-3"
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22c55e] transition duration-300 group-hover:scale-105">
-            <span className="text-xl font-black text-black">
-              C
-            </span>
-          </div>
-
-          <span className="text-2xl font-black tracking-tight">
-            CLEATO
-            <span className="text-[#22c55e]">.</span>
+      {/* Main Navigation */}
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-1.5">
+          <span className="text-2xl font-black tracking-tighter uppercase">
+            CLEATO<span className="text-emerald-600">.</span>
           </span>
-        </a>
+        </Link>
 
-        {/* DESKTOP NAVIGATION */}
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="relative text-sm font-semibold text-white/60 transition hover:text-white"
-            >
-              {link.name}
-
-              <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-[#22c55e] transition-all duration-300 hover:w-full" />
-            </a>
-          ))}
+        {/* Center Categories */}
+        <div className="hidden lg:flex items-center gap-7 text-xs font-bold tracking-wider uppercase">
+          <Link
+            href="/#shop"
+            className="text-neutral-800 hover:text-black transition py-4 border-b-2 border-transparent hover:border-black"
+          >
+            All Boots
+          </Link>
+          <Link
+            href="/collections/speed"
+            className="text-neutral-800 hover:text-black transition py-4 border-b-2 border-transparent hover:border-black"
+          >
+            Speed (F50 / Mercurial)
+          </Link>
+          <Link
+            href="/collections/control"
+            className="text-neutral-800 hover:text-black transition py-4 border-b-2 border-transparent hover:border-black"
+          >
+            Control (Predator / Phantom)
+          </Link>
+          <Link
+            href="/#accessories"
+            className="text-neutral-800 hover:text-black transition py-4 border-b-2 border-transparent hover:border-black"
+          >
+            Accessories
+          </Link>
+          <Link
+            href="/#sell"
+            className="text-emerald-700 hover:text-emerald-900 transition py-4 border-b-2 border-transparent hover:border-emerald-700"
+          >
+            Sell Your Boots
+          </Link>
+          <Link
+            href="/#about"
+            className="text-neutral-800 hover:text-black transition py-4 border-b-2 border-transparent hover:border-black"
+          >
+            Our Mission
+          </Link>
         </div>
 
-        {/* DESKTOP SHOP BUTTON */}
-        <a
-          href="#shop"
-          className="hidden items-center gap-2 rounded-full bg-[#22c55e] px-5 py-2.5 text-sm font-black text-black transition duration-300 hover:bg-[#16a34a] hover:scale-[1.02] md:flex"
-        >
-          <ShoppingBag size={16} />
-          Shop Boots
-        </a>
+        {/* Right Action Buttons */}
+        <div className="flex items-center gap-3">
+          <a
+            href="https://www.instagram.com/cleato3?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex items-center gap-1.5 rounded-full border border-neutral-300 px-4 py-2 text-xs font-bold text-neutral-800 hover:border-black transition"
+          >
+            <InstagramIcon size={14} className="text-pink-600" />
+            <span>Instagram</span>
+          </a>
 
-        {/* MOBILE MENU BUTTON */}
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-          className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 transition hover:border-[#22c55e]/30 hover:bg-[#22c55e]/10 md:hidden"
-        >
-          {open ? (
-            <X size={23} />
-          ) : (
-            <Menu size={23} />
-          )}
-        </button>
+          <Link
+            href="/#shop"
+            className="rounded-full bg-black px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-neutral-800 transition"
+          >
+            Shop Droplist
+          </Link>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 text-black hover:bg-neutral-100 rounded-lg transition"
+            aria-label="Toggle Menu"
+          >
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
-      {/* MOBILE MENU */}
-      {open && (
-        <div className="border-t border-white/10 bg-[#080808] px-6 py-6 shadow-2xl md:hidden">
-
-          <div className="flex flex-col gap-2">
-
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={closeMenu}
-                className="flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold text-white/70 transition hover:bg-white/[0.04] hover:text-[#22c55e]"
-              >
-                {link.name}
-
-                <ArrowRight
-                  size={16}
-                  className="text-white/20"
-                />
-              </a>
-            ))}
-
-            <div className="my-2 h-px bg-white/10" />
-
-            <a
-              href="#shop"
-              onClick={closeMenu}
-              className="mt-2 flex items-center justify-center gap-2 rounded-full bg-[#22c55e] px-5 py-3.5 text-sm font-black text-black transition hover:bg-[#16a34a]"
-            >
-              <ShoppingBag size={18} />
-              Shop Boots
-            </a>
-
-          </div>
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden border-t border-neutral-200 bg-white px-6 py-6 space-y-4 text-sm font-bold uppercase tracking-wider">
+          <Link
+            href="/#shop"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-neutral-900 border-b border-neutral-100"
+          >
+            All Boots
+          </Link>
+          <Link
+            href="/collections/speed"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-neutral-900 border-b border-neutral-100"
+          >
+            Speed (F50 / Mercurial)
+          </Link>
+          <Link
+            href="/collections/control"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-neutral-900 border-b border-neutral-100"
+          >
+            Control (Predator / Phantom)
+          </Link>
+          <Link
+            href="/#accessories"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-neutral-900 border-b border-neutral-100"
+          >
+            Accessories & Gear
+          </Link>
+          <Link
+            href="/#sell"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-emerald-700 border-b border-neutral-100"
+          >
+            Sell / Trade Your Boots
+          </Link>
+          <Link
+            href="/#about"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-neutral-900 border-b border-neutral-100"
+          >
+            Our Mission
+          </Link>
+          <a
+            href="https://www.instagram.com/cleato3?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 py-2 text-neutral-900"
+          >
+            <InstagramIcon size={16} className="text-pink-600" />
+            <span>Follow @cleato3 on Instagram</span>
+          </a>
         </div>
       )}
     </header>

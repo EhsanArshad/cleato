@@ -2,16 +2,10 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import {
-  ArrowLeft,
-  Check,
-  MessageCircle,
-  ShieldCheck,
-  Tag,
-  Ruler,
-} from "lucide-react";
-
+import { ArrowLeft, MessageCircle } from "lucide-react";
 import { products } from "@/data/products";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function ProductPage() {
   const params = useParams();
@@ -24,413 +18,136 @@ export default function ProductPage() {
 
     return (
       productSlug === slug ||
+      item.slug === slug ||
       item.model.toLowerCase().replace(/\s+/g, "-") === slug
     );
   });
 
   if (!product) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#080808] px-6 text-white">
-        <div className="text-center">
-          <h1 className="text-4xl font-black">
-            Product Not Available
-          </h1>
-
-          <p className="mt-4 text-white/50">
-            We couldn't find the football boots you're looking for.
+      <main className="min-h-screen bg-white text-black flex flex-col justify-between">
+        <Navbar />
+        <div className="text-center py-32 px-6">
+          <h1 className="text-4xl font-black uppercase">Product Not Found</h1>
+          <p className="mt-4 text-sm text-neutral-500">
+            This pair may have been sold or moved.
           </p>
-
           <Link
             href="/#shop"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#22c55e] px-6 py-3 font-bold text-black transition hover:bg-[#16a34a]"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-neutral-800 transition"
           >
-            <ArrowLeft size={18} />
-            Back to Shop
+            <ArrowLeft size={16} /> Back to Shop
           </Link>
         </div>
+        <Footer />
       </main>
     );
   }
 
-  const whatsappMessage = encodeURIComponent(
-    `Hi CLEATO, I'm interested in the ${product.brand} ${product.model} in size ${product.size}, listed for PKR ${product.price.toLocaleString()}. Is it still available?`
+  const savings = product.originalPrice - product.price;
+  const waMessage = encodeURIComponent(
+    `Hi CLEATO, I want to purchase the ${product.brand} ${product.model} (${product.condition}) in size ${product.size}, listed for PKR ${product.price.toLocaleString()}. Is it still available?`
   );
 
-  const discount =
-    product.originalPrice > product.price
-      ? product.originalPrice - product.price
-      : 0;
-
   return (
-    <main className="min-h-screen bg-[#080808] text-white">
+    <main className="min-h-screen bg-white text-black">
+      <Navbar />
 
-      {/* HEADER */}
-      <header className="border-b border-white/10 bg-[#080808]/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-10">
+        <Link
+          href="/#shop"
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-500 hover:text-black transition mb-8"
+        >
+          <ArrowLeft size={14} /> Back to Droplist
+        </Link>
 
-          <Link
-            href="/"
-            className="flex items-center gap-3"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22c55e]">
-              <span className="text-xl font-black text-black">
-                C
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left: Product Image Box with perfect object-contain framing */}
+          <div className="lg:col-span-7 bg-[#f5f5f5] p-6 sm:p-12 border border-neutral-200 rounded-sm">
+            <div className="relative aspect-square w-full flex items-center justify-center">
+              <span className="absolute top-0 left-0 bg-black text-white px-3 py-1.5 text-xs font-black uppercase tracking-wider">
+                {product.condition}
               </span>
+              <img
+                src={product.image}
+                alt={`${product.brand} ${product.model}`}
+                className="h-full w-full object-contain max-h-[480px]"
+              />
             </div>
+          </div>
 
-            <span className="text-2xl font-black tracking-tight">
-              CLEATO<span className="text-[#22c55e]">.</span>
-            </span>
-          </Link>
-
-          <Link
-            href="/#shop"
-            className="flex items-center gap-2 text-sm font-bold text-white/60 transition hover:text-[#22c55e]"
-          >
-            <ArrowLeft size={17} />
-            Back to Shop
-          </Link>
-
-        </div>
-      </header>
-
-      {/* PRODUCT SECTION */}
-      <section className="px-6 py-12 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-
-            {/* PRODUCT IMAGE */}
+          {/* Right: Product Details & Purchase */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
+              <span className="text-xs font-black uppercase tracking-widest text-emerald-700">
+                {product.brand} · {product.category} Boots
+              </span>
 
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#111111] p-6 shadow-2xl">
-
-                {/* CONDITION BADGE */}
-                <div className="absolute left-8 top-8 z-10 rounded-full border border-white/10 bg-black/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-md">
-                  {product.condition}
-                </div>
-
-                {/* AVAILABILITY BADGE */}
-                {product.available ? (
-                  <div className="absolute right-8 top-8 z-10 flex items-center gap-2 rounded-full border border-[#22c55e]/30 bg-[#22c55e]/10 px-4 py-2 text-xs font-bold text-[#22c55e] backdrop-blur-md">
-                    <span className="h-2 w-2 rounded-full bg-[#22c55e]" />
-                    Available
-                  </div>
-                ) : (
-                  <div className="absolute right-8 top-8 z-10 rounded-full border border-red-500/20 bg-red-500/10 px-4 py-2 text-xs font-bold text-red-400 backdrop-blur-md">
-                    Sold
-                  </div>
-                )}
-
-                <div className="flex aspect-square items-center justify-center overflow-hidden rounded-[1.5rem] bg-[#0b0b0b]">
-
-                  <img
-                    src={product.image}
-                    alt={`${product.brand} ${product.model}`}
-                    className="h-full w-full object-contain p-10"
-                  />
-
-                </div>
-              </div>
-
-              <p className="mt-4 text-center text-sm text-white/30">
-                Product image shows the available pair.
-              </p>
-
-            </div>
-
-            {/* PRODUCT INFORMATION */}
-            <div>
-
-              {/* CATEGORY */}
-              <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#22c55e]">
-                {product.category} Football Boots
-              </p>
-
-              {/* TITLE */}
-              <h1 className="mt-4 text-5xl font-black tracking-tight sm:text-6xl">
-                {product.brand} {product.model}
+              <h1 className="mt-2 text-3xl sm:text-4xl font-black uppercase tracking-tight text-black leading-tight">
+                {product.model}
               </h1>
 
-              {/* DESCRIPTION */}
-              <p className="mt-6 max-w-xl text-base leading-8 text-white/50">
-                {product.description}
-              </p>
-
-              {/* PRICE */}
-              <div className="mt-8 flex flex-wrap items-end gap-5">
-
-                <div>
-                  <p className="text-sm text-white/30">
-                    CLEATO Price
-                  </p>
-
-                  <p className="mt-1 text-4xl font-black text-[#22c55e]">
-                    PKR {product.price.toLocaleString()}
-                  </p>
-                </div>
-
-                {product.originalPrice > product.price && (
-                  <div className="pb-1">
-
-                    <p className="text-lg text-white/30 line-through">
-                      PKR {product.originalPrice.toLocaleString()}
-                    </p>
-
-                    <p className="text-sm font-bold text-[#22c55e]">
-                      Save PKR {discount.toLocaleString()}
-                    </p>
-
-                  </div>
-                )}
-
+              <div className="mt-6 flex items-baseline gap-3 pb-6 border-b border-neutral-200">
+                <span className="text-3xl font-black text-black">
+                  PKR {product.price.toLocaleString()}
+                </span>
+                <span className="text-sm font-medium text-neutral-400 line-through">
+                  PKR {product.originalPrice.toLocaleString()}
+                </span>
+                <span className="text-xs font-black text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded">
+                  Save PKR {savings.toLocaleString()}
+                </span>
               </div>
 
-              {/* PRODUCT DETAILS */}
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-
-                {/* SIZE */}
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-
-                  <div className="flex items-center gap-3">
-
-                    <Ruler
-                      size={20}
-                      className="text-[#22c55e]"
-                    />
-
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-white/30">
-                        Size
-                      </p>
-
-                      <p className="mt-1 font-bold">
-                        {product.size}
-                      </p>
-                    </div>
-
-                  </div>
-
+              {/* Specifications */}
+              <div className="mt-6 space-y-3">
+                <div className="flex justify-between py-2 border-b border-neutral-100 text-xs">
+                  <span className="font-bold text-neutral-500 uppercase">Size</span>
+                  <span className="font-black text-black">{product.size}</span>
                 </div>
-
-                {/* CONDITION */}
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-
-                  <div className="flex items-center gap-3">
-
-                    <ShieldCheck
-                      size={20}
-                      className="text-[#22c55e]"
-                    />
-
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-white/30">
-                        Condition
-                      </p>
-
-                      <p className="mt-1 font-bold">
-                        {product.condition}
-                      </p>
-                    </div>
-
-                  </div>
-
+                <div className="flex justify-between py-2 border-b border-neutral-100 text-xs">
+                  <span className="font-bold text-neutral-500 uppercase">Condition</span>
+                  <span className="font-black text-black">{product.condition} ({product.conditionScore}/10)</span>
                 </div>
-
-                {/* CATEGORY */}
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-
-                  <div className="flex items-center gap-3">
-
-                    <Tag
-                      size={20}
-                      className="text-[#22c55e]"
-                    />
-
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-white/30">
-                        Category
-                      </p>
-
-                      <p className="mt-1 font-bold">
-                        {product.category}
-                      </p>
-                    </div>
-
-                  </div>
-
+                <div className="flex justify-between py-2 border-b border-neutral-100 text-xs">
+                  <span className="font-bold text-neutral-500 uppercase">Category</span>
+                  <span className="font-black text-black">{product.category}</span>
                 </div>
-
-                {/* COLOR */}
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-
-                  <div className="flex items-center gap-3">
-
-                    <Check
-                      size={20}
-                      className="text-[#22c55e]"
-                    />
-
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-white/30">
-                        Color
-                      </p>
-
-                      <p className="mt-1 font-bold">
-                        {product.color}
-                      </p>
-                    </div>
-
-                  </div>
-
+                <div className="flex justify-between py-2 border-b border-neutral-100 text-xs">
+                  <span className="font-bold text-neutral-500 uppercase">Colorway</span>
+                  <span className="font-black text-black">{product.color}</span>
                 </div>
-
               </div>
 
-              {/* CONDITION SCORE */}
-              <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-
-                <div className="flex items-center justify-between">
-
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-white/30">
-                      Condition Rating
-                    </p>
-
-                    <p className="mt-1 font-bold">
-                      {product.condition}
-                    </p>
-                  </div>
-
-                  <div className="text-right">
-
-                    <p className="text-2xl font-black text-[#22c55e]">
-                      {product.conditionScore}/10
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
-
-                  <div
-                    className="h-full rounded-full bg-[#22c55e]"
-                    style={{
-                      width: `${product.conditionScore * 10}%`,
-                    }}
-                  />
-
-                </div>
-
+              <div className="mt-6">
+                <h4 className="text-xs font-black uppercase tracking-wider text-neutral-500 mb-2">
+                  Player Description & Inspection Notes
+                </h4>
+                <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed">
+                  {product.description}
+                </p>
               </div>
-
-              {/* WHATSAPP BUY BUTTON */}
-              {product.available ? (
-                <a
-                  href={`https://wa.me/92309026986?text=${whatsappMessage}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 flex w-full items-center justify-center gap-3 rounded-full bg-[#22c55e] px-7 py-4 text-base font-black text-black transition hover:bg-[#16a34a]"
-                >
-                  <MessageCircle size={20} />
-                  Buy / Ask About This Boot
-                </a>
-              ) : (
-                <div className="mt-8 rounded-full bg-white/10 px-7 py-4 text-center font-bold text-white/40">
-                  Currently Unavailable
-                </div>
-              )}
-
-              <p className="mt-4 text-center text-xs leading-5 text-white/30">
-                Message CLEATO on WhatsApp to confirm availability,
-                delivery and payment details.
-              </p>
-
             </div>
 
-          </div>
+            <div className="mt-8 pt-6 border-t border-neutral-200 space-y-3">
+              <a
+                href={`https://wa.me/923092026986?text=${waMessage}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 rounded-full bg-black py-4 text-xs font-black uppercase tracking-widest text-white hover:bg-neutral-800 transition shadow-sm"
+              >
+                <MessageCircle size={16} /> Order / Inquire on WhatsApp
+              </a>
 
+              <p className="text-center text-[11px] text-neutral-400">
+                Safe delivery across Pakistan · Inspection before payment
+              </p>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* TRUST SECTION */}
-      <section className="border-t border-white/10 bg-[#0b0b0b] px-6 py-16">
-
-        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-3">
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-
-            <ShieldCheck
-              size={28}
-              className="mx-auto text-[#22c55e]"
-            />
-
-            <h3 className="mt-4 font-black">
-              Quality Checked
-            </h3>
-
-            <p className="mt-2 text-sm leading-6 text-white/40">
-              Every pair is listed with its actual condition.
-            </p>
-
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-
-            <Tag
-              size={28}
-              className="mx-auto text-[#22c55e]"
-            />
-
-            <h3 className="mt-4 font-black">
-              Better Prices
-            </h3>
-
-            <p className="mt-2 text-sm leading-6 text-white/40">
-              Quality football boots without full retail prices.
-            </p>
-
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-
-            <MessageCircle
-              size={28}
-              className="mx-auto text-[#22c55e]"
-            />
-
-            <h3 className="mt-4 font-black">
-              Easy Purchase
-            </h3>
-
-            <p className="mt-2 text-sm leading-6 text-white/40">
-              Contact CLEATO directly through WhatsApp.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-white/10 bg-[#080808] px-6 py-8">
-
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-white/30 sm:flex-row">
-
-          <p>
-            © {new Date().getFullYear()} CLEATO. All rights reserved.
-          </p>
-
-          <p>
-            Football boots. Better prices.
-          </p>
-
-        </div>
-
-      </footer>
-
+      <Footer />
     </main>
   );
 }
